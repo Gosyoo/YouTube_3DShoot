@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5614690916655370431}
   - component: {fileID: 8258397069811985182}
   - component: {fileID: 8804610367016446350}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Buttle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

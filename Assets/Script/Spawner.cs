@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //生成器
-public class Spawner : MonoBehaviour
-{
+public class Spawner : MonoBehaviour {
     //波数
     public Wave[] wave;
     public Enemy enemy; //敌人预制体
@@ -16,15 +15,12 @@ public class Spawner : MonoBehaviour
 
     float nextTime; //下一只的时间
 
-    void Start()
-    {
+    void Start() {
         NextWave();
     }
 
-    void Update()
-    {
-        if (enemiesToSpawn > 0 && Time.time > nextTime)
-        {
+    void Update() {
+        if (enemiesToSpawn > 0 && Time.time > nextTime) {
             enemiesToSpawn--;
             nextTime = Time.time + currWave.timeBetweenToSpawner;
 
@@ -34,21 +30,16 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    void OnEnemyDeath()
-    {
-        //print("sssssssssss");
+    void OnEnemyDeath() {
         enemyAliveNumber--;
-        if (enemyAliveNumber <= 0)
-        {
+        if (enemyAliveNumber <= 0) {
             NextWave();
         }
     }
 
-    void NextWave()
-    {
+    void NextWave() {
         waveIndex++;
-        if (waveIndex - 1 < wave.Length)
-        {
+        if (waveIndex - 1 < wave.Length) {
             currWave = wave[waveIndex - 1];
             enemiesToSpawn = currWave.enemyCount;
             enemyAliveNumber = enemiesToSpawn;
@@ -58,8 +49,7 @@ public class Spawner : MonoBehaviour
 
     //内部类  波数
     [System.Serializable]
-    public class Wave
-    {
+    public class Wave {
         /// <summary>
         /// 生成数量
         /// </summary>
