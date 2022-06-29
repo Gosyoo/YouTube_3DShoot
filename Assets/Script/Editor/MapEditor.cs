@@ -9,9 +9,18 @@ public class MapEditor : Editor {
 
     //重新Gui
     public override void OnInspectorGUI() {
-        base.OnInspectorGUI();
+
         MapGenerator map = target as MapGenerator;
-        map.MapGenerate();
+
+        //当界面值改变时刷新
+        if (DrawDefaultInspector()) {
+            map.MapGenerate();
+        }
+
+        //手动点击按钮刷新
+        if (GUILayout.Button("Generate Map")) {
+            map.MapGenerate();
+        }
     }
 
 }
