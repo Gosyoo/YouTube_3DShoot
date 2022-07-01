@@ -150,3 +150,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHp: 5
+  enemyDeathEff: {fileID: 7888656179558033634, guid: 9c7b53c246b36ae45b2e9fbadf74c735, type: 3}

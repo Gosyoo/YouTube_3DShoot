@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour {
         //当在攻击对象内部生成时，使用碰撞检测，射线检测检测不到
         Collider[] initialCollisions = Physics.OverlapSphere(transform.position, 0.1f, layer);
         if (initialCollisions.Length > 0) {
-            HitObject(initialCollisions[0]);
+            HitObject(initialCollisions[0], initialCollisions[0].transform.position);
         }
     }
 
@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour {
         //Bug:当有一发子弹未销毁是，该方法会不再检测触发器，只能同时存在一个射线检测去检测触发器；
         //解决：项目设置-->物理-->Auto Sync Transforms(确定勾选)  2018.2之后默认为false，会有些微性能消耗
         if (Physics.Raycast(ray, out hit, moveDir + skinWidth, layer, QueryTriggerInteraction.Collide)) {
-            HitObject(hit);
+            HitObject(hit.collider, hit.point);
         }
     }
 
@@ -50,20 +50,10 @@ public class Bullet : MonoBehaviour {
     //}
 
     //击中方法
-    void HitObject(RaycastHit hit) {
-        //print(hit.GetType().Name);
-        IDamageable damageable = hit.collider.GetComponent<IDamageable>();  //获取对象脚本
-        if (damageable != null) {
-            damageable.TaskHit(damage, hit);
-        }
-        //TODO：销毁子弹
-        Destroy(gameObject);
-    }
-
-    void HitObject(Collider collider) {
+    void HitObject(Collider collider, Vector3 hitPos) {
         IDamageable damageable = collider.GetComponent<IDamageable>();
         if (damageable != null) {
-            damageable.TaskDamage(damage);
+            damageable.TaskHit(damage, hitPos, transform.forward);
         }
         GameObject.Destroy(gameObject);
     }

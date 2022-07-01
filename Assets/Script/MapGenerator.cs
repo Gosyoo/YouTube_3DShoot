@@ -22,8 +22,15 @@ public class MapGenerator : MonoBehaviour {
     bool[,] obstacleMap; //障碍物地图
 
 
-    void Start() {
-        MapGenerate();
+    void Awake() {
+        FindObjectOfType<Spawner>().OnNextWave += OnNextMap;
+    }
+
+    void OnNextMap(int waveNum) {
+        if (waveNum > 0 && waveNum <= maps.Length) {
+            mapIndex = waveNum - 1;
+            MapGenerate();
+        }
     }
 
     //生成地图
@@ -170,6 +177,17 @@ public class MapGenerator : MonoBehaviour {
         Coord tileCoord = shuffledOpenTileCoords.Dequeue();
         shuffledOpenTileCoords.Enqueue(tileCoord);
         return tileMap[tileCoord.x, tileCoord.y];
+    }
+
+    //根据位置获取瓦片
+    public Transform GetTileFromPosition(Vector3 pos) {
+        int x = Mathf.RoundToInt(pos.x / currMap.tileSize + (currMap.mapSize.x - 1) / 2f);
+        int y = Mathf.RoundToInt(pos.z / currMap.tileSize + (currMap.mapSize.y - 1) / 2f);
+
+        //注：mathf.clamp ==> 限制 值 在 最大与最小之间 ，大于最大取最大，小于最小取最小
+        x = Mathf.Clamp(x, 0, tileMap.GetLength(0) - 1);
+        y = Mathf.Clamp(y, 0, tileMap.GetLength(1) - 1);
+        return tileMap[x, y];
     }
 
     //根据瓦片坐标获取位置

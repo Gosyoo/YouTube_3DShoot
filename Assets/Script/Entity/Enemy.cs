@@ -10,6 +10,7 @@ public class Enemy : LivingEntity {
     Material skinMaterial; //材质
     LivingEntity targetEntity; //目标实体
 
+    public ParticleSystem enemyDeathEff; //敌人死亡特效（粒子系统）
     public enum State { IDLE, ATTACK, CHASE }; //状态机
     State currState;  //当前状态
 
@@ -47,7 +48,7 @@ public class Enemy : LivingEntity {
         originColor = skinMaterial.color;
     }
 
-    //角色死亡
+    //攻击目标死亡
     void OnTargetDeath() {
         hasTarget = false;
         currState = Enemy.State.IDLE;
@@ -116,6 +117,13 @@ public class Enemy : LivingEntity {
                 }
             }
             yield return new WaitForSeconds(refleshTime);
+        }
+    }
+
+    public override void TaskHit(float damage, Vector3 hitPos, Vector3 hitDirection) {
+        base.TaskHit(damage, hitPos, hitDirection);
+        if (isDeath) {
+            Destroy(Instantiate(enemyDeathEff.gameObject, hitPos, Quaternion.FromToRotation(Vector3.forward, hitDirection)), enemyDeathEff.main.startLifetimeMultiplier);
         }
     }
 }

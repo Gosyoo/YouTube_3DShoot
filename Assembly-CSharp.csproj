@@ -56,14 +56,17 @@
     <Compile Include="Assets\Script\Entity\Enemy.cs" />
     <Compile Include="Assets\Script\Entity\LivingEntity.cs" />
     <Compile Include="Assets\Script\Entity\PlayerControl.cs" />
+    <Compile Include="Assets\Script\Utility.cs" />
     <Compile Include="Assets\Script\Entity\Gun\GunControl.cs" />
     <Compile Include="Assets\Script\Entity\Gun\Gun.cs" />
     <Compile Include="Assets\Script\Entity\IDamageable.cs" />
     <Compile Include="Assets\Script\Spawner.cs" />
+    <Compile Include="Assets\Script\MapGenerator.cs" />
     <Compile Include="Assets\Script\Entity\Gun\Bullet.cs" />
     <Compile Include="Assets\Script\Entity\Player.cs" />
-    <Compile Include="Assets\Script\MapGenerator.cs" />
-    <Compile Include="Assets\Script\Utility.cs" />
+    <Compile Include="Assets\Script\GameUI.cs" />
+    <Compile Include="Assets\Script\Entity\Gun\Shell.cs" />
+    <Compile Include="Assets\Script\Entity\Gun\MuzzleFlash.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -668,6 +671,9 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
